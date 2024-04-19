@@ -1,42 +1,40 @@
 #include <iostream>
 #include <string>
 
-int getlength(char *str)
-{
-	int i;
-	
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return i;
-}
-
-void to_upper(char *str)
+void to_upper(std::string& str)
 {
 	int i;
 	int len;
 
 	i = -1;
-	len = getlength(str);
-	while (++i < len) {
-		if (str[i] >= 'a' && str[i] <= 'z') {
-			std::cout << (char)(str[i] - 32);
-		} else {
-			std::cout << str[i];
-		}
+	len = str.size();
+	while (++i < len)
+	{
+		if (std::islower(str[i]))
+			str[i] = std::toupper(str[i]);
 	}
 }
 
-int main(int ac, char **av) {
+int main(int ac, char **av)
+{
 	int i;
-	int len;
 
 	i = 1;
-	len = ac - 1;
-	while (i <= len)
+	if (ac >= 2)
 	{
-		to_upper(av[i]);
-		i++;
+		while (i <= ac - 1)
+		{
+			std::string arg(av[i]);
+			to_upper(arg);
+			std::cout << arg;
+			i++;
+		}
+		std::cout << std::endl;
+	}
+	else
+	{
+		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
 	}
 	return 0;
 }
+
