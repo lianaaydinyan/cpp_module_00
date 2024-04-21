@@ -1,5 +1,15 @@
 #include "phonebook.hpp"
 
+bool check_search_index(std::string str)
+{
+	if (str.size() == 1 && isdigit(str[0]))
+	{
+		if (str[0] >= 0 && str[0] < 8)
+			return true;
+	}
+	return false;
+}
+
 bool check_for_number(std::string str)
 {
 	int i;
@@ -56,7 +66,6 @@ int main()
 		}
 		else if (cmd == "SEARCH")
 		{
-			//spasel indexi
 			phone_book.printf_table();
 		}
 		else if (cmd == "EXIT")

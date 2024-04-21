@@ -109,21 +109,21 @@ void	PhoneBook::printf_table(void)
 		print_with_index(i);
 
 	std::cin >> index;
-	if (!(check_for_number(index)))
-	{
-		while (!(check_for_number(index)))
-		{
-			std::cout << "Invalid index, write it one more time -> ";
-			std::cin >> index;
-		}
-	}
 
+	while (!check_search_index(index))
+	{
+		std::cout << "Invalid index, write it one more time -> ";
+		std::cin >> index;
+	}
 	contact_index = std::atoi(index.c_str());
 	if (contact_index >= 0 && contact_index < 8)
-		print_whole_info(contact_index);
+	{
+		if ((contacts[contact_index].name).size() > 0)
+			print_whole_info(contact_index);
+		else
+			std::cout << "With that index, there is no contact -> ";
+	}
 }
-
-
 
 void	PhoneBook::get_rigth_size(std::string &str)
 {
