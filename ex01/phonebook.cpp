@@ -1,8 +1,8 @@
 #include "phonebook.hpp"
 
-// erb vor searchi mej index es spasum stugel for tiv lini u chanel "stoi" ov zut dzerqov nayelll
+
 // getlineic heto anpaymannayel for signal ekac chlini vor anverj cikl charajana ctrl + D
-// petq a unenal amen classi hamar hpp u cpp filer hppum miayn clasn a isk cppum impilentatian
+
 // setter and getter is best practise
 
 void	PhoneBook::exit(void)
@@ -14,11 +14,13 @@ int	PhoneBook::fill_contact(int i)
 {
 	std::string tmp_name;
 	std::cout << "Enter your name -> ";
-	std::cin >> tmp_name;
+	if (!(std::cin >> tmp_name))
+		signal_handling();
 	while (!(check_for_string(tmp_name)))
 		{
 			std::cout << "Name have to only contain characters -> ";
 			std::cin >> tmp_name;
+			signal_handling();
 		}
 
 	std::string tmp_surname;
@@ -109,7 +111,6 @@ void	PhoneBook::printf_table(void)
 		print_with_index(i);
 
 	std::cin >> index;
-
 	while (!check_search_index(index))
 	{
 		std::cout << "Invalid index, write it one more time -> ";
@@ -121,7 +122,11 @@ void	PhoneBook::printf_table(void)
 		if ((contacts[contact_index].name).size() > 0)
 			print_whole_info(contact_index);
 		else
-			std::cout << "With that index, there is no contact -> ";
+		{
+			std::cout << "With that index, there is no contact" << std::endl;
+			std::cout << "Enter only [ ADD , SEARCH , EXIT] commands " << std::endl;
+		}
+
 	}
 }
 
@@ -172,5 +177,3 @@ bool	PhoneBook::search_contact(int i)
 		std::cout << "You have entered unvalid index ^_^ " << std::endl;
 	return false;
 }
-
-

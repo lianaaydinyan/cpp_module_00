@@ -2,12 +2,14 @@
 #define PHONEBOOK_H
 
 #include "contact.hpp"
+
+//main.cpp
+void	signal_handling(void);
 bool check_for_number(std::string str);
 bool check_for_string(std::string str);
 bool check_cmd(std::string *str);
 bool check_search_index(std::string str);
 
-//main.cpp
 //phonebook.cpp
 
 

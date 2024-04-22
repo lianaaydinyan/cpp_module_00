@@ -1,10 +1,19 @@
 #include "phonebook.hpp"
 
+void	signal_handling(void)
+{
+	//handlin when u press Ctrl+D on Unix-like systems or Ctrl+Z on Windows
+	if (std::cin.eof())
+		std::cin.clear();
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
+
 bool check_search_index(std::string str)
 {
-	if (str.size() == 1 && isdigit(str[0]))
+	if (str.size() == 1 && check_for_number(str))
 	{
-		if (str[0] >= 0 && str[0] < 8)
+		int num = std::stoi(str);
+		if (num >= 0 && num < 8)
 			return true;
 	}
 	return false;
