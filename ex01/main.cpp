@@ -5,7 +5,7 @@ void	signal_handling(void)
 	//handlin when u press Ctrl+D on Unix-like systems or Ctrl+Z on Windows
 	if (std::cin.eof())
 		std::cin.clear();
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	exit(-1);
 }
 
 bool check_search_index(std::string str)
@@ -52,8 +52,8 @@ bool check_for_string(std::string str)
 
 bool check_cmd(std::string *str)
 {
-	std::cin >> *str;
-
+	if(!(std::cin >> *str))
+		signal_handling();
 	if (*str == "ADD" || *str == "SEARCH" || *str == "EXIT")
 		return true;
 	return false;
@@ -63,21 +63,16 @@ int main()
 {
 
 	std::string cmd;
-	std::cout << "Enter only [ ADD , SEARCH , EXIT] commands " << std::endl;
+	std::cout << "Enter only [ADD, SEARCH, EXIT] commands " << std::endl;
 	PhoneBook phone_book;
 
 	while (check_cmd(&cmd))
 	{
-		if (cmd == "ADD")
-		{
-			//compare
+		if (!(cmd.compare("ADD")))
 			phone_book.add_contact();
-		}
-		else if (cmd == "SEARCH")
-		{
+		else if (!(cmd.compare("SEARCH")))
 			phone_book.printf_table();
-		}
-		else if (cmd == "EXIT")
+		else if ((cmd.compare("EXIT")))
 			phone_book.exit();
 	}
 	return 0;

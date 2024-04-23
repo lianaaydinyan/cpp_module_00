@@ -19,13 +19,14 @@ int	PhoneBook::fill_contact(int i)
 	while (!(check_for_string(tmp_name)))
 		{
 			std::cout << "Name have to only contain characters -> ";
-			std::cin >> tmp_name;
-			signal_handling();
+			if(!(std::cin >> tmp_name))
+				signal_handling();
 		}
 
 	std::string tmp_surname;
 	std::cout << "Enter your surname -> ";
-	std::cin >> tmp_surname;
+	if (!(std::cin >> tmp_surname))
+		signal_handling();
 	while (!(check_for_string(tmp_surname)))
 		{
 			std::cout << "Surname have to only contain characters -> ";
@@ -34,33 +35,37 @@ int	PhoneBook::fill_contact(int i)
 
 	std::string tmp_nickname;
 	std::cout << "Enter your nickname -> ";
-	std::cin >> tmp_nickname;
+	if (!(std::cin >> tmp_nickname))
+		signal_handling();
 	while ((tmp_nickname.empty()))
 		{
 			std::cout << "Nickname have not to be empty -> " ;
-			std::cin >> tmp_nickname;
+			if (!(std::cin >> tmp_nickname))
+				signal_handling();
 		}
 
 	std::string tmp_number;
 	std::cout << "Enter your phone number -> ";
-	std::cin >> tmp_number;
+	if (!(std::cin >> tmp_number))
+		signal_handling();
 	while (!(check_for_number(tmp_number)))
 		{
 			std::cout << "Phone Number have to be contain only numbers -> " ;
-			std::cin >> tmp_number;
+			if (!(std::cin >> tmp_number))
+				signal_handling();
 		}
 	
 	std::string tmp_secret;
 	std::cout << "Enter your secret -> ";
-	std::cin >> tmp_secret;
+	if (!(std::cin >> tmp_secret))
+		signal_handling();
 	while ((tmp_secret.empty()))
 		{
 			std::cout << "Secret have not to be empty -> " ;
-			std::cin >> tmp_secret;
+			if (!(std::cin >> tmp_secret))
+				signal_handling();
 		}
 
-	// if every field filled properly we can add it to our array
-	// now adding
 	contacts[i].name = tmp_name;
 	contacts[i].surname = tmp_surname;
 	contacts[i].nickname = tmp_nickname;
@@ -81,10 +86,15 @@ void	PhoneBook::print_whole_info(int i)
 void	PhoneBook::add_contact(void)
 {
 	if (num_of_contacts >= 0 && num_of_contacts < 8)
+	{
 		fill_contact(num_of_contacts);
+		num_of_contacts++;
+	}
 	else if (num_of_contacts >= 8)
+	{
 		fill_contact(num_of_contacts % 8);
-	num_of_contacts++;
+		num_of_contacts++;
+	}
 }
 
 void	PhoneBook::printf_table(void)
@@ -93,7 +103,7 @@ void	PhoneBook::printf_table(void)
 	std::string index;
 	int 		contact_index;
 
-	i = -1;
+	i = 0;
 	std::cout << "---------------------------------------------" << std::endl;
 	std::cout << "|";
 	std::cout  << std::right << std::setw(10) << "id";
@@ -107,14 +117,18 @@ void	PhoneBook::printf_table(void)
 	std::cout << std::endl;
 	std::cout << "---------------------------------------------" << std::endl;
 
-	while ( ++i < num_of_contacts)
+	while (((contacts[i].name).size()) > 0 && i <= 7)
+	{
 		print_with_index(i);
-
-	std::cin >> index;
+		i++;
+	}
+	if(!(std::cin >> index))
+		signal_handling();
 	while (!check_search_index(index))
 	{
 		std::cout << "Invalid index, write it one more time -> ";
-		std::cin >> index;
+		if(!(std::cin >> index))
+			signal_handling();
 	}
 	contact_index = std::atoi(index.c_str());
 	if (contact_index >= 0 && contact_index < 8)
@@ -126,7 +140,6 @@ void	PhoneBook::printf_table(void)
 			std::cout << "With that index, there is no contact" << std::endl;
 			std::cout << "Enter only [ ADD , SEARCH , EXIT] commands " << std::endl;
 		}
-
 	}
 }
 
