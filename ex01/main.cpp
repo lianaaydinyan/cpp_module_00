@@ -2,24 +2,25 @@
 
 void	signal_handling(void)
 {
-	//handlin when u press Ctrl+D on Unix-like systems or Ctrl+Z on Windows
 	if (std::cin.eof())
 		std::cin.clear();
 	exit(-1);
 }
 
-bool check_search_index(std::string str)
+bool	check_search_index(std::string str)
 {
-	if (str.size() == 1 && check_for_number(str))
+	int num;
+
+	if ((str.size() == 1 )&& check_for_number(str))
 	{
-		int num = std::stoi(str);
+		num = std::stoi(str);
 		if (num >= 0 && num < 8)
 			return true;
 	}
 	return false;
 }
 
-bool check_for_number(std::string str)
+bool	check_for_number(std::string str)
 {
 	int i;
 	int size;
@@ -35,7 +36,7 @@ bool check_for_number(std::string str)
 	return true;
 }
 
-bool check_for_string(std::string str)
+bool	check_for_string(std::string str)
 {
 	int i;
 	int size;
@@ -50,7 +51,7 @@ bool check_for_string(std::string str)
 	return true;
 }
 
-bool check_cmd(std::string *str)
+bool	check_cmd(std::string *str)
 {
 	if(!(std::cin >> *str))
 		signal_handling();

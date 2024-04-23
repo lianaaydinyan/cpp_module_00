@@ -1,10 +1,5 @@
 #include "phonebook.hpp"
 
-
-// getlineic heto anpaymannayel for signal ekac chlini vor anverj cikl charajana ctrl + D
-
-// setter and getter is best practise
-
 void	PhoneBook::exit(void)
 {
 	std::exit(0);
@@ -22,7 +17,6 @@ int	PhoneBook::fill_contact(int i)
 			if(!(std::cin >> tmp_name))
 				signal_handling();
 		}
-
 	std::string tmp_surname;
 	std::cout << "Enter your surname -> ";
 	if (!(std::cin >> tmp_surname))
@@ -32,7 +26,6 @@ int	PhoneBook::fill_contact(int i)
 			std::cout << "Surname have to only contain characters -> ";
 			std::cin >> tmp_surname;
 		}
-
 	std::string tmp_nickname;
 	std::cout << "Enter your nickname -> ";
 	if (!(std::cin >> tmp_nickname))
@@ -43,7 +36,6 @@ int	PhoneBook::fill_contact(int i)
 			if (!(std::cin >> tmp_nickname))
 				signal_handling();
 		}
-
 	std::string tmp_number;
 	std::cout << "Enter your phone number -> ";
 	if (!(std::cin >> tmp_number))
@@ -54,7 +46,6 @@ int	PhoneBook::fill_contact(int i)
 			if (!(std::cin >> tmp_number))
 				signal_handling();
 		}
-	
 	std::string tmp_secret;
 	std::cout << "Enter your secret -> ";
 	if (!(std::cin >> tmp_secret))
@@ -65,7 +56,6 @@ int	PhoneBook::fill_contact(int i)
 			if (!(std::cin >> tmp_secret))
 				signal_handling();
 		}
-
 	contacts[i].name = tmp_name;
 	contacts[i].surname = tmp_surname;
 	contacts[i].nickname = tmp_nickname;

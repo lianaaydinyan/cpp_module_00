@@ -10,9 +10,6 @@ bool check_for_string(std::string str);
 bool check_cmd(std::string *str);
 bool check_search_index(std::string str);
 
-//phonebook.cpp
-
-
 class PhoneBook
 {
 	private:
