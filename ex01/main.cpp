@@ -1,4 +1,4 @@
-#include "phonebook.hpp"
+#include "phonebook.h"
 
 void	signal_handling(void)
 {
@@ -51,11 +51,12 @@ bool	check_for_string(std::string str)
 	return true;
 }
 
-bool	check_cmd(std::string *str)
+bool	check_cmd(std::string &str)
 {
-	if(!(std::cin >> *str))
+	std::cout << "Enter only [ADD, SEARCH, EXIT] commands " << std::endl;
+	if(!(std::cin >> str))
 		signal_handling();
-	if (*str == "ADD" || *str == "SEARCH" || *str == "EXIT")
+	if ( str == "ADD" || str == "SEARCH" || str == "EXIT")
 		return true;
 	return false;
 }
@@ -64,17 +65,21 @@ int main()
 {
 
 	std::string cmd;
-	std::cout << "Enter only [ADD, SEARCH, EXIT] commands " << std::endl;
 	PhoneBook phone_book;
 
-	while (check_cmd(&cmd))
+	while (1)
 	{
-		if (!(cmd.compare("ADD")))
-			phone_book.add_contact();
-		else if (!(cmd.compare("SEARCH")))
-			phone_book.printf_table();
-		else if ((cmd.compare("EXIT")))
-			phone_book.exit();
+		if (check_cmd(cmd))
+		{
+			if (!(cmd.compare("ADD")))
+				phone_book.add_contact();
+			else if (!(cmd.compare("SEARCH")))
+				phone_book.printf_table();
+			else if (!(cmd.compare("EXIT")))
+				phone_book.exit();
+		}
+		else
+		std::cout << "Invalid input:" << std::endl;
 	}
 	return 0;
 }

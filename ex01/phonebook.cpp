@@ -1,4 +1,4 @@
-#include "phonebook.hpp"
+#include "phonebook.h"
 
 void	PhoneBook::exit(void)
 {
@@ -112,6 +112,7 @@ void	PhoneBook::printf_table(void)
 		print_with_index(i);
 		i++;
 	}
+	std::cout << "index: ";
 	if(!(std::cin >> index))
 		signal_handling();
 	while (!check_search_index(index))
@@ -126,14 +127,11 @@ void	PhoneBook::printf_table(void)
 		if ((contacts[contact_index].name).size() > 0)
 			print_whole_info(contact_index);
 		else
-		{
 			std::cout << "With that index, there is no contact" << std::endl;
-			std::cout << "Enter only [ ADD , SEARCH , EXIT] commands " << std::endl;
-		}
 	}
 }
 
-void	PhoneBook::get_rigth_size(std::string &str)
+std::string	PhoneBook::get_rigth_size(std::string str)
 {
 	int size;
 
@@ -143,24 +141,27 @@ void	PhoneBook::get_rigth_size(std::string &str)
 		str = str.substr(0, 9);
 		str += ".";
 	}
+	return str;
 }
 
 void	PhoneBook::print_with_index(int i)
 {
+	std::string temp_str;
+
 	std::cout << "|" ;
 	std::cout << std::right << std::setw(10) << i;
-	get_rigth_size(contacts[i].name);
+	temp_str = get_rigth_size(contacts[i].name);
 
 	std::cout << "|" ;
-	std::cout << std::right << std::setw(10) << (contacts[i].name);
-	get_rigth_size(contacts[i].surname);
+	std::cout << std::right << std::setw(10) << (temp_str);
+	temp_str = get_rigth_size(contacts[i].surname);
 
 	std::cout << "|" ;
-	std::cout << std::right << std::setw(10) << (contacts[i].surname);
-	get_rigth_size(contacts[i].nickname);
+	std::cout << std::right << std::setw(10) << (temp_str);
+	temp_str = get_rigth_size(contacts[i].nickname);
 
 	std::cout << "|" ;
-	std::cout << std::right << std::setw(10) << (contacts[i].nickname);
+	std::cout << std::right << std::setw(10) << (temp_str);
 	std::cout << "|" << std::endl;
 	std::cout << "---------------------------------------------" << std::endl;
 }
